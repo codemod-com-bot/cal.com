@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation } from "react-i18next";
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { TFunction } from "next-i18next";
@@ -44,6 +46,8 @@ const enum State {
 }
 
 export default function MoveTeamToOrg() {
+const { t } = useTranslation();
+
   const [state, setState] = useState(State.IDLE);
   const moveUsersOptions = [
     {
@@ -135,15 +139,13 @@ export default function MoveTeamToOrg() {
             />
 
             {moveMembers === true ? (
-              <div className="mt-2">Members of the team will also be moved to the organization</div>
+              <div className="mt-2">{t('members-of-the-team-will-also-be-moved-to-the-organization')}</div>
             ) : moveMembers === false ? (
-              <div className="mt-2">Members of the team will not be moved to the organization</div>
+              <div className="mt-2">{t('members-of-the-team-will-not-be-moved-to-the-organization')}</div>
             ) : null}
           </div>
         </div>
-        <Button type="submit" loading={state === State.LOADING}>
-          Move Team to Org
-        </Button>
+        <Button type="submit" loading={state === State.LOADING}>{t('move-team-to-org')}</Button>
       </Form>
     </Wrapper>
   );

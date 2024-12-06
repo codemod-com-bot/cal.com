@@ -1,0 +1,6 @@
+{
+  "client-id": "Client Id",
+  "client-secret": "Client Secret",
+  "lock-user": "Lock User",
+  "lock-team": "Lock Team"
+}

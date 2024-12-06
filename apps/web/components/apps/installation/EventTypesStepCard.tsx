@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import React from "react";
@@ -64,11 +65,13 @@ const EventTypeCard: FC<EventTypeCardProps> = ({
           )}
           <div className="mt-2 flex flex-row flex-wrap gap-2">
             {Boolean(durations.length) &&
-              durations.map((duration) => (
-                <Badge key={`event-type-${id}-duration-${duration}`} variant="gray" startIcon="clock">
-                  {duration}m
-                </Badge>
-              ))}
+              durations.map((duration) =>  {
+const { t } = useTranslation();
+
+return (
+                <Badge key={`event-type-${id}-duration-${duration}`} variant="gray" startIcon="clock">{t('duration-in-minutes', { duration })}</Badge>
+              )
+})}
           </div>
         </li>
       </label>
@@ -76,6 +79,8 @@ const EventTypeCard: FC<EventTypeCardProps> = ({
   );
 };
 const EventTypeGroup: FC<EventTypeGroupProps> = ({ groupIndex, userName, ...props }) => {
+const { t } = useTranslation();
+
   const { control } = useFormContext<TEventTypesForm>();
   const { fields, update } = useFieldArray({
     control,
@@ -110,7 +115,7 @@ const EventTypeGroup: FC<EventTypeGroupProps> = ({ groupIndex, userName, ...prop
                 />
               ))
             ) : (
-              <div className="text-subtle bg-muted w-full p-2  text-center text-sm">Team has no Events</div>
+              <div className="text-subtle bg-muted w-full p-2  text-center text-sm">{t('team-has-no-events')}</div>
             )}
           </ul>
         </ScrollableArea>

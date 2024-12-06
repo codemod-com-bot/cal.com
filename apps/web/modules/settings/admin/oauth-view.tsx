@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation } from "react-i18next";
+
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +16,8 @@ type FormValues = {
 };
 
 export default function OAuthView() {
+const { t } = useTranslation();
+
   const oAuthForm = useForm<FormValues>();
   const [clientSecret, setClientSecret] = useState("");
   const [clientId, setClientId] = useState("");
@@ -88,7 +92,7 @@ export default function OAuthView() {
       ) : (
         <div>
           <div className="text-emphasis mb-5 text-xl font-semibold">{oAuthForm.getValues("name")}</div>
-          <div className="mb-2 font-medium">Client Id</div>
+          <div className="mb-2 font-medium">{t('client-id')}</div>
           <div className="flex">
             <code className="bg-subtle text-default w-full truncate rounded-md rounded-r-none py-[6px] pl-2 pr-2 align-middle font-mono">
               {" "}
@@ -109,7 +113,7 @@ export default function OAuthView() {
           </div>
           {clientSecret ? (
             <>
-              <div className="mb-2 mt-4 font-medium">Client Secret</div>
+              <div className="mb-2 mt-4 font-medium">{t('client-secret')}</div>
               <div className="flex">
                 <code className="bg-subtle text-default w-full truncate rounded-md rounded-r-none py-[6px] pl-2 pr-2 align-middle font-mono">
                   {" "}

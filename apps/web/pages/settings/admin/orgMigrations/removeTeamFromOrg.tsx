@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation } from "react-i18next";
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { TFunction } from "next-i18next";
@@ -44,6 +46,8 @@ export const getFormSchema = (t: TFunction) =>
   });
 
 export default function RemoveTeamFromOrg() {
+const { t } = useTranslation();
+
   const [state, setState] = useState(State.IDLE);
   const { t } = useLocale();
   const formSchema = getFormSchema(t);
@@ -105,9 +109,7 @@ export default function RemoveTeamFromOrg() {
             placeholder="Enter Target organization ID"
           />
         </div>
-        <Button type="submit" loading={state === State.LOADING}>
-          Remove Team from Org
-        </Button>
+        <Button type="submit" loading={state === State.LOADING}>{t('remove-team-from-org')}</Button>
       </Form>
     </Wrapper>
   );

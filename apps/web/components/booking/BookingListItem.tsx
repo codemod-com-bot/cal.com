@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -101,6 +102,8 @@ const isBookingReroutable = (booking: ParsedBooking): booking is ReroutableBooki
 };
 
 function BookingListItem(booking: BookingItemProps) {
+const { t } = useTranslation();
+
   const parsedBooking = buildParsedBooking(booking);
 
   const { userTimeZone, userTimeFormat, userEmail } = booking.loggedInUser;
@@ -483,7 +486,7 @@ function BookingListItem(booking: BookingItemProps) {
               label={
                 <>
                   {t("rejection_reason")}
-                  <span className="text-subtle font-normal"> (Optional)</span>
+                  <span className="text-subtle font-normal">{t('optional')}</span>
                 </>
               }
               value={rejectionReason}
