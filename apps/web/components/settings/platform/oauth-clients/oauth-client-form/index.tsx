@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState, useCallback } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 
@@ -41,6 +42,8 @@ export const OAuthClientForm = ({
   isFormDisabled,
   onSubmit,
 }: OAuthClientFormProps) => {
+const { t } = useTranslation();
+
   const { t } = useLocale();
   const { register, control, handleSubmit, setValue } = useForm<FormValues>({
     defaultValues: { redirectUris: [{ uri: "" }], ...defaultValues },
@@ -81,9 +84,7 @@ export const OAuthClientForm = ({
               type="checkbox"
               disabled={!!defaultValues}
             />
-            <label htmlFor={`${permissionKey}Read`} className="cursor-pointer text-sm">
-              Read
-            </label>
+            <label htmlFor={`${permissionKey}Read`} className="cursor-pointer text-sm">{t('read')}</label>
           </div>
           <div className="flex items-center gap-x-2">
             <input
@@ -93,9 +94,7 @@ export const OAuthClientForm = ({
               type="checkbox"
               disabled={!!defaultValues}
             />
-            <label htmlFor={`${permissionKey}Write`} className="cursor-pointer text-sm">
-              Write
-            </label>
+            <label htmlFor={`${permissionKey}Write`} className="cursor-pointer text-sm">{t('write')}</label>
           </div>
         </div>
       </div>
@@ -111,7 +110,7 @@ export const OAuthClientForm = ({
           <TextField disabled={isFormDisabled} required={true} label="Client name" {...register("name")} />
         </div>
         <div className="mt-6">
-          <Label>Redirect uris</Label>
+          <Label>{t('redirect-uris')}</Label>
           {fields.map((field, index) => {
             return (
               <div className="flex items-end" key={field.id}>
@@ -228,13 +227,11 @@ export const OAuthClientForm = ({
             type="checkbox"
             disabled={isFormDisabled}
           />
-          <label htmlFor="areEmailsEnabled" className="cursor-pointer px-2 text-base font-semibold">
-            Enable emails
-          </label>
+          <label htmlFor="areEmailsEnabled" className="cursor-pointer px-2 text-base font-semibold">{t('enable-emails')}</label>
         </div>
         <div className="mt-6">
           <div className="flex justify-between">
-            <h1 className="text-base font-semibold underline">Permissions</h1>
+            <h1 className="text-base font-semibold underline">{t('permissions')}</h1>
             <Button type="button" onClick={selectAllPermissions} disabled={!!defaultValues || isFormDisabled}>
               {!isSelectAllPermissionsChecked ? "Select all" : "Discard all"}
             </Button>

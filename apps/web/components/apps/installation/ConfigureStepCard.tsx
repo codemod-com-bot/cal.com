@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
@@ -60,6 +61,8 @@ type TUpdatedEventTypesStatus = { id: number; updated: boolean }[][];
 
 const EventTypeAppSettingsForm = forwardRef<HTMLButtonElement, EventTypeAppSettingsFormProps>(
   function EventTypeAppSettingsForm(props, ref) {
+const { t } = useTranslation();
+
     const { handleDelete, onSubmit, eventType, loading, isConferencing } = props;
     const { t } = useLocale();
 
@@ -107,9 +110,7 @@ const EventTypeAppSettingsForm = forwardRef<HTMLButtonElement, EventTypeAppSetti
               className="absolute right-4 top-4 h-4 w-4 cursor-pointer"
               onClick={() => !loading && handleDelete()}
             />
-            <button type="submit" className="hidden" form={`eventtype-${eventType.id}`} ref={ref}>
-              Save
-            </button>
+            <button type="submit" className="hidden" form={`eventtype-${eventType.id}`} ref={ref}>{t('save-0')}</button>
           </div>
         </div>
       </Form>
@@ -186,6 +187,8 @@ const EventTypeGroup = ({
 };
 
 export const ConfigureStepCard: FC<ConfigureStepCardProps> = (props) => {
+const { t } = useTranslation();
+
   const { loading, formPortalRef, handleSetUpLater } = props;
   const { t } = useLocale();
   const { control, watch } = useFormContext<TEventTypesForm>();
@@ -243,9 +246,7 @@ export const ConfigureStepCard: FC<ConfigureStepCardProps> = (props) => {
             />
           </div>
         ))}
-        <button form="outer-event-type-form" type="submit" className="hidden" ref={mainForSubmitRef}>
-          Save
-        </button>
+        <button form="outer-event-type-form" type="submit" className="hidden" ref={mainForSubmitRef}>{t('save-1')}</button>
         <Button
           className="text-md mt-6 w-full justify-center"
           type="button"

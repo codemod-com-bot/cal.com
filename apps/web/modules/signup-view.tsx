@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation } from "react-i18next";
+
 
 import { Analytics as DubAnalytics } from "@dub/analytics/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -179,6 +181,8 @@ export default function Signup({
   redirectUrl,
   emailVerificationEnabled,
 }: SignupProps) {
+const { t } = useTranslation();
+
   const isOrgInviteByLink = orgSlug && !prepopulateFormValues?.username;
   const [isSamlSignup, setIsSamlSignup] = useState(false);
   const [premiumUsername, setPremiumUsername] = useState(false);
@@ -608,16 +612,12 @@ export default function Signup({
                         className="text-emphasis hover:underline"
                         key="terms"
                         href={`${WEBSITE_TERMS_URL}`}
-                        target="_blank">
-                        Terms
-                      </Link>,
+                        target="_blank">{t('terms')}</Link>,
                       <Link
                         className="text-emphasis hover:underline"
                         key="privacy"
                         href={`${WEBSITE_PRIVACY_POLICY_URL}`}
-                        target="_blank">
-                        Privacy Policy.
-                      </Link>,
+                        target="_blank">{t('privacy-policy')}</Link>,
                     ]}
                   />
                 </div>

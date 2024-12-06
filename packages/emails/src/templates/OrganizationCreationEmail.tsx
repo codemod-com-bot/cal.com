@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from "react-i18next";
 import { Trans } from "next-i18next";
 
 import { APP_NAME, WEBAPP_URL } from "@calcom/lib/constants";
@@ -8,6 +9,8 @@ import { V2BaseEmailHtml } from "../components";
 export const OrganizationCreationEmail = (
   props: OrganizationCreation & Partial<React.ComponentProps<typeof V2BaseEmailHtml>>
 ) => {
+const { t } = useTranslation();
+
   const { prevLink, newLink, orgName: teamName } = props;
   const prevLinkWithoutProtocol = props.prevLink?.replace(/https?:\/\//, "");
   const newLinkWithoutProtocol = props.newLink?.replace(/https?:\/\//, "");
@@ -35,9 +38,12 @@ export const OrganizationCreationEmail = (
           marginBottom: "32px",
           marginTop: "32px",
           lineHeightStep: "24px",
-        }}>
-        You have been added as an owner of the organization. To publish your new organization, visit{" "}
-        <a href={`${WEBAPP_URL}/upgrade`}>{WEBAPP_URL}/upgrade</a>
+        }}><Trans
+i18nKey="owner-added-organization"
+values={{ WEBAPP_URL }}
+components={{"0": 
+        <a href={`${WEBAPP_URL}/upgrade`} />}}
+/>
       </p>
       <p
         data-testid="organization-link-info"
@@ -49,29 +55,34 @@ export const OrganizationCreationEmail = (
           lineHeightStep: "24px",
         }}>
         {isNewUser ? (
-          <Trans>
-            Enjoy your new organization link: <a href={`${newLink}`}>{newLinkWithoutProtocol}</a>
+          <Trans><Trans
+i18nKey="new-organization-link"
+values={{ _a_href_newLink_newLinkWithoutProtocol_a_: <a href={`${newLink}`}>{newLinkWithoutProtocol}</a> }}
+components={{"0": <a href={`${newLink}`} />}}
+/>
           </Trans>
         ) : (
-          <Trans i18nKey="email|existing_user_added_link_changed">
-            Your link has been changed from <a href={prevLink ?? ""}>{prevLinkWithoutProtocol}</a> to{" "}
-            <a href={newLink ?? ""}>{newLinkWithoutProtocol}</a> but don&apos;t worry, all previous links
-            still work and redirect appropriately.
-            <br />
-            <br />
-            Please note: All of your personal event types have been moved into the <strong>
+          <Trans i18nKey="email|existing_user_added_link_changed"><Trans
+i18nKey="link-changed-notification"
+values={{ _a_href_prevLink_prevLinkWithoutProtocol_a_: <a href={prevLink ?? ""}>{prevLinkWithoutProtocol}</a>, _a_href_newLink_newLinkWithoutProtocol_a_: 
+            <a href={newLink ?? ""}>{newLinkWithoutProtocol}</a> }}
+components={{"0": <a href={prevLink ?? ""} />, "1": 
+            <a href={newLink ?? ""} />}}
+/><br />
+            <br /><Trans
+i18nKey="personal-event-types-moved"
+values={{ _strong_teamName_strong_: <strong>
               {teamName}
-            </strong>{" "}
-            organisation, which may also include potential personal link.
-            <br />
-            <br />
-            Please log in and make sure you have no private events on your new organisational account.
-            <br />
-            <br />
-            For personal events we recommend creating a new account with a personal email address.
-            <br />
-            <br />
-            Enjoy your new clean link: <a href={`${newLink}?orgRedirection=true`}>{newLinkWithoutProtocol}</a>
+            </strong> }}
+components={{"0": <strong />}}
+/><br />
+            <br />{t('check-private-events')}<br />
+            <br />{t('recommend-creating-new-account')}<br />
+            <br /><Trans
+i18nKey="new-clean-link"
+values={{ _a_href_newLink_orgRedirection_true_newLinkWithoutProtocol_a_: <a href={`${newLink}?orgRedirection=true`}>{newLinkWithoutProtocol}</a> }}
+components={{"0": <a href={`${newLink}?orgRedirection=true`} />}}
+/>
           </Trans>
         )}
       </p>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 // eslint-disable-next-line no-restricted-imports
 import { noop } from "lodash";
@@ -55,6 +56,8 @@ const EnterpriseLicense = (
     ) => void;
   } & Omit<JSX.IntrinsicElements["form"], "onSubmit">
 ) => {
+const { t } = useTranslation();
+
   const { onSubmit, onSuccess = noop, onSuccessValidate = noop, ...rest } = props;
   const { t } = useLocale();
   const [checkLicenseLoading, setCheckLicenseLoading] = useState(false);
@@ -99,7 +102,7 @@ const EnterpriseLicense = (
           </Button>
           <div className="relative flex justify-center">
             <hr className="border-subtle my-8 w-full border-[1.5px]" />
-            <span className="bg-default absolute mt-[22px] px-3.5 text-sm">OR</span>
+            <span className="bg-default absolute mt-[22px] px-3.5 text-sm">{t('or')}</span>
           </div>
           {t("already_have_key")}
           <Controller

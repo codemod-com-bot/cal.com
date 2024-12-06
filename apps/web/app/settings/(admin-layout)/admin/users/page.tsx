@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { _generateMetadata, getFixedT } from "app/_utils";
 
 import { getServerSessionForAppDir } from "@calcom/features/auth/lib/get-server-session-for-app-dir";
@@ -12,6 +13,8 @@ export const generateMetadata = async () =>
   );
 
 const Page = async () => {
+const { t } = useTranslation();
+
   const session = await getServerSessionForAppDir();
   const t = await getFixedT(session?.user.locale || "en");
   return (
@@ -22,7 +25,7 @@ const Page = async () => {
         <div className="mt-4 space-x-5 sm:ml-16 sm:mt-0 sm:flex-none">
           {/* TODO: Add import users functionality */}
           {/* <Button disabled>Import users</Button> */}
-          <Button href="/settings/admin/users/add">Add user</Button>
+          <Button href="/settings/admin/users/add">{t('add-user')}</Button>
         </div>
       }>
       <UsersListingView />

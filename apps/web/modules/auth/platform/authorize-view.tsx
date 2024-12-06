@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation, Trans } from "react-i18next";
+
 
 import { useRouter } from "next/navigation";
 
@@ -11,6 +13,8 @@ import { Avatar, Button, Icon } from "@calcom/ui";
 import { hasPermission } from "../../../../../packages/platform/utils/permissions";
 
 export default function Authorize() {
+const { t } = useTranslation();
+
   const { t } = useLocale();
   const router = useRouter();
 
@@ -47,9 +51,12 @@ export default function Authorize() {
 
     return (
       !!permissionsMessage && (
-        <li key={value.read} className="relative pl-5 text-sm">
-          <span className="absolute left-0">&#10003;</span>
-          {permissionsMessage} your {`${value.label}s`.toLocaleLowerCase()}
+        <li key={value.read} className="relative pl-5 text-sm"><Trans
+i18nKey="permissions-message-your"
+values={{ permissionsMessage }}
+components={{"0": 
+          <span className="absolute left-0" />}}
+/>{`${value.label}s`.toLocaleLowerCase()}
         </li>
       )
     );

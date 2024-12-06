@@ -1,0 +1,7 @@
+{
+  "read": "Read",
+  "write": "Write",
+  "redirect-uris": "Redirect uris",
+  "enable-emails": "Enable emails",
+  "permissions": "Permissions"
+}

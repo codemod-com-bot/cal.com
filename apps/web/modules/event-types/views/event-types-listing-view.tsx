@@ -1,4 +1,6 @@
 "use client";
+import { useTranslation } from "react-i18next";
+
 
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Trans } from "next-i18next";
@@ -254,6 +256,8 @@ export const InfiniteEventTypeList = ({
   isPending,
   debouncedSearchTerm,
 }: InfiniteEventTypeListProps): JSX.Element => {
+const { t } = useTranslation();
+
   const { t } = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -810,10 +814,8 @@ export const InfiniteEventTypeList = ({
               i18nKey={`delete${isManagedEventPrefix()}_event_type_description`}
               components={{ li: <li />, ul: <ul className="ml-4 list-disc" /> }}>
               <ul>
-                <li>Members assigned to this event type will also have their event types deleted.</li>
-                <li>
-                  Anyone who they&apos;ve shared their link with will no longer be able to book using it.
-                </li>
+                <li>{t('members-assigned-to-this-event-type-will-also-have-their-event-types-deleted')}</li>
+                <li>{t('anyone-who-theyve-shared-their-link-with-will-no-longer-be-able-to-book-using-it')}</li>
               </ul>
             </Trans>
           </p>

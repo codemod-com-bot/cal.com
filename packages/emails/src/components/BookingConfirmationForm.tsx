@@ -1,4 +1,7 @@
+import { useTranslation, Trans } from "react-i18next";
 export const BookingConfirmationForm = (props: { action: string; children: React.ReactNode }) => {
+const { t } = useTranslation();
+
   return (
     <form action={props.action} method="POST" target="_blank">
       {props.children}
@@ -34,9 +37,11 @@ export const BookingConfirmationForm = (props: { action: string; children: React
             textAlign: "left",
             whiteSpace: "pre-wrap",
             display: "block",
-          }}>
-          Reason for rejection &nbsp;
-          <small>(Optional)</small>
+          }}><Trans
+i18nKey="reason-for-rejection-optional"
+components={{"0": 
+          <small />}}
+/>
         </label>
         <textarea
           name="reason"
